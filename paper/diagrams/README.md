@@ -1,0 +1,2 @@
+# Diagrams and Figures
+This folder contains all the images used for the paper. Diagrams are made and can be edited using [diagrams.net](https://app.diagrams.net/), a free and open source cross-platform graph drawing software.

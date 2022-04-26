@@ -1,0 +1,14 @@
+*.o
+*.d
+*.swp
+lpass
+lpass.1
+lpass.exe
+certificate.h
+tags
+build
+test/.lpass
+version.h
+
+# IDE
+/.idea

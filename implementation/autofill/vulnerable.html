@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="js/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <!------ Include the above in your HEAD tag ---------->
+</head>
+
+<body id="LoginForm">
+    <div class="container">
+        <h1 class="form-heading">Password Autofill Test</h1>
+        <h4>Vulnerability Tests</h4>
+        <text>All origin tests</text>
+        <iframe src="https://pwmtester1.herokuapp.com/"></iframe>
+        <iframe src="https://pwmtester2.herokuapp.com/"></iframe>
+        <iframe src="https://pwmtester2.herokuapp.com/" style="display:none;"></iframe>
+        <iframe src="https://pwmtester1.herokuapp.com/" style="display:none;"></iframe>
+        <iframe src="https://pwmtester2.herokuapp.com/" style="visibility: hidden;"></iframe>
+    </div>
+    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups" style="padding-top: 10px;">
+        <div class="btn-group mr-2" role="group" aria-label="First group" style="padding: 5px;">
+            <a href="/" class="btn btn-info" role="button">Home</a>
+        </div>
+        <div class="btn-group mr-2" role="group" aria-label="First group" style="padding: 5px;">
+            <a href="/diffpath" class="btn btn-info" role="button">Different Path</a>
+            <a href="/autocompleteoff" class="btn btn-info" role="button">Autocomplete off</a>
+            <a href="/diffaction" class="btn btn-info" role="button">Different action 1</a>
+            <a href="/diffactiontwo" class="btn btn-info" role="button">Different action 2</a>
+        </div>
+        <div class="btn-group mr-2" role="group" aria-label="Second group" style="padding: 5px;">
+            <a href="/formone" class="btn btn-info" role="button">Form 1</a>
+            <a href="/formtwo" class="btn btn-info" role="button">Form 2</a>
+            <a href="/formthree" class="btn btn-info" role="button">Form 3</a>
+            <a href="/formfour" class="btn btn-info" role="button">Form 4</a>
+            <a href="/formfive" class="btn btn-info" role="button">Form 5</a>
+        </div>
+        <div class="btn-group" role="group" aria-label="Third group" style="padding: 5px;">
+            <a href="/vulnerable" class="btn btn-info" role="button">Vulnerable</a>
+            <a href="/invisible" class="btn btn-info" role="button">Invisible login</a>
+            <a href="/csrf" class="btn btn-info" role="button">CSRF</a>
+        </div>
+        <div class="btn-group" role="group" aria-label="Fourth group" style="padding: 5px;">
+            <a href="/same" class="btn btn-info" role="button">Same-origin iframe</a>
+            <a href="/sameh" class="btn btn-info" role="button">Hidden (Opacity 0) same-origin iframe</a>
+            <a href="/sameop" class="btn btn-info" role="button">Same-origin Opacity 0.001</a>
+        </div>
+        <div class="btn-group" role="group" aria-label="Fifth group" style="padding: 5px;">
+            <a href="/cross" class="btn btn-info" role="button">Cross-origin</a>
+            <a href="/crossh" class="btn btn-info" role="button">Hidden (Opacity 0) cross-origin iframe</a>
+            <a href="/crossop" class="btn btn-info" role="button">Cross-origin Opacity 0.001</a>
+        </div>
+    </div>
+</body>
+
+</html>

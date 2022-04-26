@@ -1,0 +1,351 @@
+:man source:   lpass
+:man manual:   lpass
+
+LPASS(1)
+========
+
+
+NAME
+----
+lpass - command line interface for LastPass
+
+SYNOPSIS
+--------
+[verse]
+*lpass* [ --version, -v | --help, -h ]
+*lpass* <subcommand> [<args>]
+
+DESCRIPTION
+-----------
+'lpass' is a simple command line interface to LastPass. It is comprised of
+several subcommands:
+
+[verse]
+ lpass *login* [--trust] [--plaintext-key [--force, -f]] [--color=auto|never|always] USERNAME
+ lpass *logout* [--force, -f] [--color=auto|never|always]
+ lpass *passwd*
+ lpass *show* [--sync=auto|now|no] [--clip, -c] [--quiet, -q] [--expand-multi, -x] [--json, -j] [--all|--username|--password|--url|--notes|--field=FIELD|--id|--name|--attach=ATTACHID] [--basic-regexp, -G|--fixed-strings, -F] [--color=auto|never|always] {NAME|UNIQUEID}*
+ lpass *ls* [--sync=auto|now|no] [--long, -l] [-m] [-u] [--color=auto|never|always] [GROUP]
+ lpass *mv* [--sync=auto|now|no] [--color=auto|never|always] {UNIQUENAME|UNIQUEID} GROUP
+ lpass *add* [--sync=auto|now|no] [--non-interactive] {--name|--username, -u|--password, -p|--url|--notes|--field=FIELD|--note-type=NOTETYPE} [--color=auto|never|always] {NAME|UNIQUEID}
+ lpass *edit* [--sync=auto|now|no] [--non-interactive] {--name|--username, -u|--password, -p|--url|--notes|--field=FIELD} [--color=auto|never|always] {NAME|UNIQUEID}
+ lpass *generate* [--sync=auto|now|no] [--clip, -c] [--username=USERNAME] [--url=URL] [--no-symbols] [--color=auto|never|always] {NAME|UNIQUEID} LENGTH
+ lpass *duplicate* [--sync=auto|now|no] [--color=auto|never|always] {UNIQUENAME|UNIQUEID}
+ lpass *rm* [--sync=auto|now|no] [--color=auto|never|always] {UNIQUENAME|UNIQUEID}
+ lpass *status* [--quiet, -q] [--color=auto|never|always]
+ lpass *sync* [--background, -b] [--color=auto|never|always]
+ lpass *import* [--sync=auto|now|no] [--keep-dupes] [FILENAME]
+ lpass *export* [--sync=auto|now|no] [--color=auto|never|always] [--fields=FIELDLIST]
+ lpass *share* *userls* SHARE
+ lpass *share* *useradd* [--read-only=[true|false]] [--hidden=[true|false]] [--admin=[true|false]] SHARE USERNAME
+ lpass *share* *usermod* [--read-only=[true|false]] [--hidden=[true|false]] [--admin=[true|false]] SHARE USERNAME
+ lpass *share* *userdel* SHARE USERNAME
+ lpass *share* *create* SHARE
+ lpass *share* *rm* SHARE
+ lpass *share* *limit* [--deny|--allow] [--add|--rm|--clear] SHARE USERNAME [sites]
+
+Synchronization
+~~~~~~~~~~~~~~~
+The '--sync' options control when the current operation involves a
+synchronization with the server. If 'now' is set, and the command makes a
+change, the change is synchronized before the command exits. If 'now' is set,
+and the command displays a value, the local cache is synchronized before the
+value is shown. If 'now' is set, and the command is otherwise successful, but
+synchronization fails, the command will return an error. If 'auto' is set,
+and the command makes a change, the change is synchronized to the server in
+the background. If 'auto' is set, and the command displays a value, the local
+cache is synchronized before the value is shown only if the local cache is
+more than 5 seconds (or 'LPASS_AUTO_SYNC_TIME' seconds, if set) old. If 'no'
+is set, the command will not interact with the server, unless there is a
+current upload queue being processed. Any local changes that are not
+synchronized with the server will exist in a queue of timestamped requests
+which will be synchronized on the next occurring synchronization.
+
+The 'sync' command forces a synchronization of the local cache with the
+LastPass servers, and does not exit until the local cache is synchronized or
+until an error occurs. Alternatively, if '--background' is specified, the
+synchronization occurs in a daemonized process.
+
+Agent
+~~~~~
+An agent process will be spawned in the background on a first successful
+command, and all subsequent commands will use the agent for decryption,
+instead of asking a user for a password. The agent will quit after one hour,
+unless the 'LPASS_AGENT_TIMEOUT' environment variable is set to an alternative
+number of seconds in which to quit, or 0 to never quit. If the environment
+variable 'LPASS_AGENT_DISABLE' is set to 1, the agent will not be used.
+
+Password Entry
+~~~~~~~~~~~~~~
+The *pinentry* program, part of *gpg2*(1), may be used for inputting
+passwords if it is installed. A custom path to the *pinentry* program can be
+provided by the 'LPASS_PINENTRY' environment variable.
+
+If *pinentry* program is unavailable, or if the 'LPASS_DISABLE_PINENTRY'
+environment variable is set to 1, passwords will be read from standard input and a
+prompt will be displayed on standard error.
+
+The program used for inputting passwords may also be configured by setting the
+'LPASS_ASKPASS' environment variable. 'LPASS_ASKPASS' is expected to be a
+binary that produces a prompt using its first command-line argument, and
+outputs the entered password to standard out.  ssh-askpass implements this
+protocol, as does the following shell script:
+
+[verse]
+ #!/bin/bash
+ echo -n "$*: " >/dev/stderr
+ stty -echo
+ read answer
+ stty echo
+ echo $answer
+
+Entry Specification
+~~~~~~~~~~~~~~~~~~~
+Commands that take a 'UNIQUENAME' will fail if the provided name is used
+multiple times, and return an error. Commands may alternatively take a
+'UNIQUEID', which will be the integer 'ID' provided by LastPass for identifying
+entries uniquely. Commands that take either a 'NAME' or a 'UNIQUEID' will create a
+new entry if a 'NAME' is specified and otherwise overwrite an existing entry if
+'UNIQUEID' is specified.
+
+Logging In
+~~~~~~~~~~
+The 'login' subcommand will initialize a local cache and configuration folder,
+then attempt to authenticate itself with the LastPass servers, using the
+provided command line credentials or by interactively prompting (in the case of
+multifactor or an unprovided password). The '--trust' option will cause
+subsequent logins to not require multifactor authentication. If the
+'--plaintext-key' option is specified, the decryption key will be saved to the
+hard disk in plaintext.  Please note that use of this option is discouraged
+except in limited situations, as it greatly decreases the security of data.
+
+The 'logout' subcommand will remove the local cache and stored encryption
+keys. It will prompt the user to confirm, unless '--force' is specified.
+
+The 'passwd' subcommand may be used to change your LastPass password:
+it will prompt for the old and new password and then re-encrypt all records
+with the newly derived key.
+
+Viewing
+~~~~~~~
+The 'show' subcommand will display a password or selected field.
+
+By default, the site you specify with the 'show' subcommand must
+*exactly* match the name of the site.  If the '--fixed-strings' or '-F'
+option is set, then the 'show' subcommand will find a site containing
+that *exact* substring; if the '--basic-regexp' or '-G' option is set,
+then the 'show' subcommand will find a site matching a case-insensitive
+regular expression.
+
+By default if your 'show' subcommand matches more than one site, then
+the 'show' subcommand will generate a warning and display the names of
+matching sites but no other information.  The '--expand-multi' or '-x'
+option will instead show the requested information from all of the
+matching sites.
+
+The 'ls' subcommand will list names in groups in a tree structure. If
+the '--long' or '-l' option is set, then also list the last modification
+time.  The '-u' option may be passed to show the last use (last touch) time
+instead, if available. Both times are in GMT.
+
+Passing '--json' to 'show' will generate json output instead of
+human-readable text.
+
+In addition to using the built-in formats, both 'show' and 'ls' subcommands
+support printf-style format strings by using the '--format' option with
+the following placeholders:
+
+* %ai: account id
+* %an: account name
+* %aN: account name including path
+* %au: account user
+* %ap: account password
+* %am: account modification time
+* %aU: account last touch time
+* %as: account share name
+* %ag: account group name
+* %al: account URL
+* %fn: field name (for 'show')
+* %fv: field value (for 'show')
+
+A slash can be added between the '%' and the placeholder to indicate that a
+slash should be appended, only if the printed value is expanded to a non-empty
+string.  For example, this command will properly show the full path to
+an account: `lpass ls --format="%/as%/ag%an"`.
+
+Modifying
+~~~~~~~~~
+The 'edit' subcommand will edit the selected field. If '--non-interactive' is not
+set, the selected field will be edited using 'EDITOR'; otherwise the command will
+accept data until EOF or, unless the notes field is being edited, the first new line.
+Please note that when editing interactively, the contents of the field may be
+saved on disk in tmp files or in editor swap files, depending on your system
+configuration.
+
+The 'generate' subcommand will create a randomly generated password for the
+chosen key name, and optionally add a url and username while inserting the
+generated password.
+
+The 'rm' command will remove the specified entry, and the 'duplicate' command
+will create a duplicate entry of the one specified, but with a different 'ID'.
+
+Backup
+~~~~~~
+The 'export' subcommand will dump all account information including
+passwords to stdout (unencrypted) in CSV format.  The optional
+'--fields=FIELDLIST' argument may contain a comma-separated subset of the
+following fields:
+
+  id, url, username, password, extra, name, fav, id, grouping, group,
+  fullname, last_touch, last_modified_gmt, attachpresent
+
+The 'import' subcommand does the reverse: accounts from an unencrypted
+CSV file are uploaded to the server.
+
+It is recommended that such backups be encrypted at rest, for example by
+piping to and from gpg.
+
+Shared Folder Commands
+~~~~~~~~~~~~~~~~~~~~~~
+The 'share' command and its accompanying subcommands can be used to manipulate
+shared folders, if available to the (enterprise or premium) user.  The
+'userls', 'useradd', 'usermod', and 'userdel' subcommands may be used to
+query and modify membership of the shared folder, while the 'create' and 'rm'
+share subcommands may be used to add new, or delete existing shared folders.
+The normal 'generate' and 'edit' commands may be used to edit accounts within
+the shared folder.
+
+The 'share limit' command may be used to manipulate account access lists on the
+share for a specific user.  Running with no arguments will display the
+current access levels for a user.  The '--add', '--rm', and '--clear' options
+may be used to add to, remove from, or reset the list.  Passing '--allow' or
+'--deny' will make the list a whitelist or blacklist, respectively.
+
+Clipboard
+~~~~~~~~~
+Commands that take a '-c' or '--clip' option will copy the output to the
+clipboard, using *xclip*(1) or *xsel*(1) on X11-based systems, *pbcopy*(1)
+on OSX, or *putclip* on Cygwin. The command to be used can be overridden by
+specifying the `LPASS_CLIPBOARD_COMMAND` environment variable.
+
+Color Output
+~~~~~~~~~~~~
+The '--color' option controls colored output to the terminal.  By default,
+commands will use '--color=auto', in which color output is used unless the
+output is not a tty (for example, when passed to a pipe or file).  If 'always'
+is used, colors are produced regardless of the output detection.  If 'never'
+is used, no color escape sequences are emitted.
+
+Configuration
+~~~~~~~~~~~~~
+'lpass' stores configuration in the following locations, in descending
+order of precedence:
+
+* The directory '$LPASS_HOME', if set
+* '$XDG_CONFIG_HOME/lpass', '$XDG_DATA_HOME/lpass', and
+  '$XDG_RUNTIME_DIR/lpass' (or equivalent defaults), if at least
+  '$XDG_RUNTIME_DIR' is set
+* '$HOME/.lpass'
+
+All configuration may be specified via environment variables. Alternatively, a
+set of environment variable overrides may be specified in '$LPASS_HOME/env' in
+the form of:
+
+[verse]
+VARIABLE1=VALUE1
+VARIABLE2=VALUE2
+...
+
+Aliases
+~~~~~~~
+Default options can be specified for any command by creating command aliases.
+Command aliases are stored in the configuration directory (see previous
+section) with files named 'alias.*command*'.  For example, to force the
+'ls' subcommand to never use color, make an 'alias.ls' file with the
+appropriate option:
+----
+echo 'ls --color=never' > ~/.config/lpass/alias.ls
+----
+
+Similarly, new subcommands can be created based on built-in subcommands with
+options.  Thus,
+----
+echo 'show --password -c' > ~/.config/lpass/alias.passclip
+----
+
+would create a 'passclip' subcommand that copies your password onto the
+clipboard.
+
+ENVIRONMENT VARIABLES
+---------------------
+The following environment variables may be used for configuration as described
+in the section above:
+
+* 'LPASS_HOME'
+* 'LPASS_AUTO_SYNC_TIME'
+* 'LPASS_AGENT_TIMEOUT'
+* 'LPASS_AGENT_DISABLE'
+* 'LPASS_PINENTRY'
+* 'LPASS_DISABLE_PINENTRY'
+* 'LPASS_ASKPASS'
+* 'LPASS_CLIPBOARD_COMMAND'
+
+EXAMPLES
+--------
+
+In the following examples, "$" indicates a shell prompt while "#"
+indicates a comment.
+
+----
+# login, generate and retrieve a new password
+$ lpass login user@example.com
+$ lpass generate work/email 20
+G</Czo4*c;A+g;KIHkO-
+$ lpass ls work
+work
+    email [id: 140613939481239829]
+$ lpass show -p email
+G</Czo4*c;A+g;KIHkO-
+
+# Copy password to clipboard
+$ lpass show -cp email
+
+# Add a new secure note
+$ lpass add --note-type=ssn info/my-ssn
+# (editor shows a template file; fill in and save)
+Name: info/my-ssn
+NoteType: Social Security
+Name: My Name Goes Here
+Number: 123-45-6789
+Notes:    # Add notes below this line
+Any notes I want to save go here.
+~
+~
+
+$ lpass show my-ssn
+info/my-ssn [id: 0]
+Number: 123-45-6789
+Name: My Name Goes Here
+NoteType: Social Security
+Notes:
+Any notes I want to save go here.
+
+# Display a secure note attachment
+$ lpass show my-secure-note
+info/my-secure-note [id: 1426405543365295118]
+URL: http://sn
+att-1426405543365295118-94690: travel-flight.pdf
+$ lpass show my-secure-note --attach att-1426405543365295118-94690
+"travel-flight.pdf" is a binary file, print it anyway (or save)?  [y/n/S] s
+Wrote 122864 bytes to "travel-flight.pdf"
+
+# Display secure note attachment to standard output
+$ lpass show my-secure-note --attach att-1426405543365295118-94690 --quiet
+[... binary data on stdout ...]
+
+# Add an account non-interactively by creating the proper template
+printf "Username: wizard97\nPassword: vJwhFfBBtn8hj4" | \
+    lpass add Facebook --non-interactive
+----
+
+

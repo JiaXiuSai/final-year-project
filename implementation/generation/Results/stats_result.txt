@@ -1,0 +1,83 @@
+1password.txt
+Frequency sorted char list (Highest to lowest):
+3890627514:?>F%#te@q^da_u*!}U+sPrvc,.zkbE~JgM=Do)-RL]ZGTKNnCYjiQwyAXhVBfmHpWx
+Total number of characters: 77
+Alphabet set: ABCDEFGHJKLMNPQRTUVWXYZabcdefghijkmnopqrstuvwxyz
+Excluded alphabets: I,O,S,l
+Number set: 0123456789
+Symbol set: !#%)*+,-.:=>?@]^_}~
+
+bitwarden.txt
+Frequency sorted char list (Highest to lowest):
+35768942WRvZBAVXNDdYQwKaHTmFiSUbyzfPCGkEJMguhetcLopsqjrnx
+Total number of characters: 57
+Alphabet set: ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz
+Excluded alphabets: I,O,l
+Number set: 23456789
+Excluded numbers: 0,1
+Symbol set: 
+
+bitwarden_symbols.txt
+Frequency sorted char list (Highest to lowest):
+#^!%$@&*SYvimRaCqWDMjyZLsTxpHtXVJKGwbENkgfzdBQhuePAonUFrc
+Total number of characters: 57
+Alphabet set: ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz
+Excluded alphabets: I,O,l
+Number set: 
+Excluded numbers: 0,1,2,3,4,5,6,7,8,9
+Symbol set: !#$%&*@^
+
+chrome.txt
+Frequency sorted char list (Highest to lowest):
+56837294,=&*:'?-@$%M+.)#~!/x;^(wgYEX_dyChVUteviGDScJmBAfkLzFjQTNqaprsbPKuZHRWn
+Total number of characters: 78
+Alphabet set: ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz
+Excluded alphabets: I,O,l,o
+Number set: 23456789
+Excluded numbers: 0,1
+Symbol set: !#$%&'()*+,-./:;=?@^_~
+
+dashlane.txt
+Frequency sorted char list (Highest to lowest):
+$?#@!&9734518260aITEcHoLGOArjkdUJtwyfXmWKRlCNgxqVQDFevzSBsYMpibuPnhZ
+Total number of characters: 68
+Alphabet set: ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+Number set: 0123456789
+Symbol set: !#$&?@
+
+edge.txt
+Frequency sorted char list (Highest to lowest):
+_:!-.29543876PuxDYVzydimXLQNqwkSFJfKbCMGHjTceEvRsphZUgatBArnW
+Total number of characters: 61
+Alphabet set: ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz
+Excluded alphabets: I,O,l,o
+Number set: 23456789
+Excluded numbers: 0,1
+Symbol set: !-.:_
+
+firefox.txt
+Frequency sorted char list (Highest to lowest):
+58794326fwUFstqQBeWyjZDvpKaCbTmhXPVJErgSxnLckdAuHzGiMNRY
+Total number of characters: 56
+Alphabet set: ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz
+Excluded alphabets: I,O,l,o
+Number set: 23456789
+Excluded numbers: 0,1
+Symbol set: 
+
+lastpass.txt
+Frequency sorted char list (Highest to lowest):
+7Zu0nx4Qob51cyOCfdpVGSAi3IMFKjJelsNL6mBrtwahzYHqDXPvgRW9E2T8kU
+Total number of characters: 62
+Alphabet set: ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+Number set: 0123456789
+Symbol set: 
+
+lastpass_symbols.txt
+Frequency sorted char list (Highest to lowest):
+Ci@EsL%-pK+gq];W1M6xl9QU?5J(,rIaG3kZ&b#uXBFSYcRDh^)}fen70P=w[`tm8!<*"HAdoy'T/2j|\z>.$N_{~:O4vV
+Total number of characters: 94
+Alphabet set: ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+Number set: 0123456789
+Symbol set: !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~
+

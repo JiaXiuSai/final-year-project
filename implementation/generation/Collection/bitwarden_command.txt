@@ -1,0 +1,1 @@
+for i in {1..100000}; do bw generate -u -l - n -s >> bitwarden_symbols.txt; echo $'' >> bitwarden_symbols.txt; done 

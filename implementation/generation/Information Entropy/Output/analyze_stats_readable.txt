@@ -1,0 +1,60 @@
+1password
+character_set: Af!%8UjeE]vJbsg.)oh3GwmZ0H:1_xa7pq+tV5PdTu6MyQ,i4?}L=nrCR>@k^*#Y9KBW~-Fzc2NDX
+set_shannon_entropy: 6.26635 , pwd_entropy: 125.33573 with 77 symbols, 100000 samples
+letter frequency ratios: mean: 0.013, stddev: 0.0, min: 0.013, max: 0.014
+Percentage that use ever char: 1.0
+
+bitwarden
+character_set: 9SqWNwaYTktRGLd7JQDX6PE8vrAFmVU4Z2syzBHp3Mujb5fcCKenxhiog
+set_shannon_entropy: 5.82349 , pwd_entropy: 81.66046 with 57 symbols, 100000 samples
+letter frequency ratios: mean: 0.018, stddev: 0.002, min: 0.016, max: 0.023
+Percentage that use ever char: 1.0
+
+bitwarden_symbols
+character_set: JMLZ%KkHf!TbdrwmN^PAeVSBacFuD&@ohjvg*p$sYqtnUyCEQxziWXGR#
+set_shannon_entropy: 5.82335 , pwd_entropy: 81.66046 with 57 symbols, 8137 samples
+letter frequency ratios: mean: 0.018, stddev: 0.002, min: 0.016, max: 0.023
+Percentage that use ever char: 0.0
+
+chrome
+character_set: Yi-(&6Z4RH=?tcgK5uL)^#zW2NDA,mybGs*Uj~3axBX$!wdM/@p9Pn7:r_qQC%VvT;+'JehFEf8S.k
+set_shannon_entropy: 6.27418 , pwd_entropy: 94.28103 with 78 symbols, 100000 samples
+letter frequency ratios: mean: 0.013, stddev: 0.002, min: 0.012, max: 0.018
+Percentage that use ever char: 1.0
+
+dashlane
+character_set: 32SE6KIl$jqzHbeDrLg1PZm!9QCFYX?kJ5U&RwnAvW#7yGxs@fiOtBa8cVu0dTMoNp4h
+set_shannon_entropy: 6.06856 , pwd_entropy: 97.39941 with 68 symbols, 100000 samples
+letter frequency ratios: mean: 0.015, stddev: 0.002, min: 0.013, max: 0.022
+Percentage that use ever char: 1.0
+
+edge
+character_set: c.xp53CTu_4BbsJq8X-jwADKe:92GQLESWNZ!7zf6VyPvHarUgmiFMhktYRdn
+set_shannon_entropy: 5.90787 , pwd_entropy: 88.96106 with 61 symbols, 100000 samples
+letter frequency ratios: mean: 0.016, stddev: 0.003, min: 0.015, max: 0.025
+Percentage that use ever char: 1.0
+
+firefox
+character_set: De49JGNWXfxi5raHZnPRzFMud6EtjgY3LsShBvqT8UCpQ27cbKwkVmAy
+set_shannon_entropy: 5.79951 , pwd_entropy: 87.11032 with 56 symbols, 100000 samples
+letter frequency ratios: mean: 0.018, stddev: 0.002, min: 0.017, max: 0.023
+Percentage that use ever char: 1.0
+
+lastpass
+character_set: UJMTxzhuA2rayKn0IStdocgLvBCXPHwOEi9jG3Wb4Q75ZVRs68DNfpmkqeFYl1
+set_shannon_entropy: 5.95419 , pwd_entropy: 71.45036 with 62 symbols, 100000 samples
+letter frequency ratios: mean: 0.016, stddev: 0.0, min: 0.016, max: 0.016
+Percentage that use ever char: 0.88
+
+lastpass_symbols
+character_set: STi62K,Y^!O=hd~)A@Jsjw]_e3'*4-;#8xC}0[gualq{17&$kpNVHUPXf<?vEQo9|+BbG5"tLcmI`>\ZW%rMR.z/y(FnD:
+set_shannon_entropy: 6.55418 , pwd_entropy: 104.87342 with 94 symbols, 10000 samples
+letter frequency ratios: mean: 0.011, stddev: 0.0, min: 0.01, max: 0.011
+Percentage that use ever char: 0.0
+
+rockyou
+character_set: 16485309-user27kingmoahwKyltcdBAYfbvxj$REDpqJONTH_z.ML=IS#!PCUW@XGFZ&*V\';,/?Q+~[<]():%^{`>"|}
+set_shannon_entropy: 3.34201 , pwd_entropy: 91.97798 with 95 symbols, 6516971 samples
+letter frequency ratios: mean: 0.006, stddev: 0.009, min: 0.0, max: 0.044
+Percentage that use ever char: 0.36
+

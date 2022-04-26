@@ -1,0 +1,336 @@
+#!/bin/bash
+
+. $(dirname $0)/include.sh
+
+function test_login
+{
+	login || return 1
+	assertz $?
+}
+
+function test_login_wrong_pw_should_fail
+{
+	LPASS_ASKPASS=./askpass-wrong.sh login
+	local ret=$?
+	rm .askpass.lock 2>/dev/null
+	assert $ret
+}
+
+function test_add_account
+{
+	login || return 1
+	local name="test-add-account"
+	local url="https://example.com"
+	local username="user27"
+	local password="999999999"
+
+	cat<<__EOM__ | lpass add --sync=no --non-interactive $name
+Name: $name
+URL: $url
+Username: $username
+Password: $password
+__EOM__
+	assertz $? || return 1
+
+	assert_str_eq "$(lpass show --sync=no --password $name)" "$password"
+}
+
+function test_add_site_note
+{
+	login || return 1
+	local name="test-add-site-note"
+	local url="https://example.com"
+	local username="user27"
+	local password="999999999"
+	local notes="here are some notes!!"
+
+	cat<<__EOM__ | lpass add --sync=no --non-interactive $name
+Name: $name
+URL: $url
+Username: $username
+Password: $password
+Notes:
+$notes
+__EOM__
+	assertz $? || return 1
+
+	assert_str_eq "$(lpass show --sync=no --note $name)" "$notes"
+}
+
+function test_add_note
+{
+	login || return 1
+	local name="test-add-note"
+	cat<<__EOM__ | lpass add --sync=no --note-type=ssn --non-interactive $name
+Name: $name
+Number: 000-00-0000
+NoteType: Social Security
+__EOM__
+	assertz $? || return 1
+
+	assert_str_eq "$(lpass show --sync=no --field=Number $name)" "000-00-0000"
+}
+
+function test_add_note_with_field
+{
+	login || return 1
+	local name="test-add-note-with-notes"
+	cat<<__EOM__ | lpass add --sync=no --note-type=ssn --non-interactive $name
+Name: $name
+Number: 000-00-0000
+Field: This is my SSN
+NoteType: Social Security
+__EOM__
+	assertz $? || return 1
+
+	assert_str_eq "$(lpass show --sync=no --field=Number $name)" "000-00-0000"
+}
+
+function test_add_ssn_name
+{
+	login || return 1
+	local name="test-add-note"
+	local person_name="John Doe"
+	cat<<__EOM__ | lpass add --sync=no --note-type=ssn --non-interactive $name
+Name: $name
+Name: $person_name
+Number: 000-00-0000
+NoteType: Social Security
+__EOM__
+	assertz $? || return 1
+
+	assert_str_eq "$(lpass show --sync=no --field=Name $name)" "$person_name"
+}
+
+function test_add_ssh_key
+{
+    login || return 1
+    local name="test-add-ssh-key"
+	read -r -d '' privkey <<__EOM__
+-----BEGIN EC PRIVATE KEY-----
+Proc-Type: 4,ENCRYPTED
+DEK-Info: AES-128-CBC,5D91CAD2A62C0E3EDCCB853FCB21054D
+
+V/HhFCirRljWoJnjOwwhoFqdRnpWbXQsrppky/uT/Ttb9k5YmC9SLhEZyf8fAReJ
+KGiE8MvnnXKvDMj5eqeWge/YleHsNvyR+8qPqfPha9X/vYCUeR/ZoGg/CKzMVBN3
+bnghFVqB3npQykkkbiBEKLDwosTkR/0JO4I8PRzo34k=
+-----END EC PRIVATE KEY-----
+__EOM__
+    read -r -d '' pubkey <<__EOM__
+ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBHiavhPDPg2OH2YjJWDpF9JHpKfnVGB0xc7cSojMXMJftgH4UvgUr8fVJhfp1ix/I8a/a8C0RiCo/Q/A6z3o+7U= blah
+__EOM__
+    cat <<__EOM__ | lpass add --sync=no --note-type=ssh-key --non-interactive $name
+Name: $name
+Hostname: foobar
+Private Key: $privkey
+Public Key: $pubkey
+__EOM__
+    assert_str_eq "$(lpass show --sync=no --field='Private Key' $name)" "$privkey" || return 1
+    assert_str_eq "$(lpass show --sync=no --field='Public Key' $name)" "$pubkey"
+}
+
+function test_edit_ssh_key
+{
+    login || return 1
+    local name="test-edit-ssh-key"
+	read -r -d '' privkey <<__EOM__
+-----BEGIN EC PRIVATE KEY-----
+Proc-Type: 4,ENCRYPTED
+DEK-Info: AES-128-CBC,5D91CAD2A62C0E3EDCCB853FCB21054D
+
+V/HhFCirRljWoJnjOwwhoFqdRnpWbXQsrppky/uT/Ttb9k5YmC9SLhEZyf8fAReJ
+KGiE8MvnnXKvDMj5eqeWge/YleHsNvyR+8qPqfPha9X/vYCUeR/ZoGg/CKzMVBN3
+bnghFVqB3npQykkkbiBEKLDwosTkR/0JO4I8PRzo34k=
+-----END EC PRIVATE KEY-----
+__EOM__
+    read -r -d '' pubkey <<__EOM__
+ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBHiavhPDPg2OH2YjJWDpF9JHpKfnVGB0xc7cSojMXMJftgH4UvgUr8fVJhfp1ix/I8a/a8C0RiCo/Q/A6z3o+7U= blah
+__EOM__
+    cat <<__EOM__ | lpass add --sync=no --note-type=ssh-key --non-interactive $name
+Name: $name
+Hostname: foobar
+__EOM__
+    echo "$privkey" | lpass edit --sync=no --field='Private Key' --non-interactive $name
+    echo "$pubkey" | lpass edit --sync=no --field='Public Key' --non-interactive $name
+    assert_str_eq "$(lpass show --sync=no --field='Private Key' $name)" "$privkey" || return 1
+    assert_str_eq "$(lpass show --sync=no --field='Public Key' $name)" "$pubkey"
+}
+
+function test_edit_username
+{
+	login || return 1
+	local username="new-test-user"
+	echo $username | lpass edit --username --non-interactive test-account
+	assertz $? || return 1
+	assert_str_eq "$(lpass show --sync=no --username test-account)" $username
+}
+
+function test_edit_field
+{
+	login || return 1
+	local hostname="quux.bar.com"
+	echo $hostname | lpass edit --field=Hostname --non-interactive test-note
+	assertz $? || return 1
+	assert_str_eq "$(lpass show --sync=no --field=Hostname test-note)" $hostname
+}
+
+function test_edit_reprompt
+{
+	login || return 1
+	echo "Reprompt: No" | lpass edit --non-interactive test-reprompt-account
+	assertz $? || return 1
+	assert_str_eq "$(lpass show --sync=no test-reprompt-account | grep Reprompt)" ""
+
+	echo "Reprompt: Yes" | lpass edit --non-interactive test-reprompt-account
+	assertz $? || return 1
+	assert_str_eq "$(lpass show --sync=no test-reprompt-account | grep Reprompt)" "Reprompt: Yes"
+}
+
+function test_edit_reprompt_note
+{
+	login || return 1
+	echo "Reprompt: No" | lpass edit --non-interactive test-reprompt-note
+	assertz $? || return 1
+	assert_str_eq "$(lpass show --sync=no test-reprompt-note | grep Reprompt)" "" || return 1
+
+	echo "Reprompt: Yes" | lpass edit --non-interactive test-reprompt-note
+	assertz $? || return 1
+	assert_str_eq "$(lpass show --sync=no test-reprompt-note | grep Reprompt)" "Reprompt: Yes"
+}
+
+function test_duplicate
+{
+	login || return 1
+	lpass duplicate --sync=no test-account || return 1
+	local numaccts=$(lpass ls --sync=no | grep test-account | wc -l)
+	assert_eq $numaccts 2
+}
+
+function test_generate
+{
+	login || return 1
+	lpass generate --sync=no test-generate 30 >/dev/null || return 1
+	local newpw=$(lpass show --sync=no --password test-generate)
+	assert_eq ${#newpw} 30
+}
+
+function test_show
+{
+	login || return 1
+	read -r -d '' expected <<__EOM__
+test-group/test-account [id: 0001]
+Username: xyz@example.com
+Password: test-account-password
+URL: https://test-url.example.com/
+__EOM__
+	local out=$(lpass show --sync=no test-account)
+	assert_str_eq "$expected" "$out"
+}
+
+function test_show_json
+{
+	login || return 1
+	read -r -d '' expected <<__EOM__
+[
+  {
+    "id": "0001",
+    "name": "test-account",
+    "fullname": "test-group/test-account",
+    "username": "xyz@example.com",
+    "password": "test-account-password",
+    "last_modified_gmt": "skipped",
+    "last_touch": "skipped",
+    "group": "test-group",
+    "url": "https://test-url.example.com/",
+    "note": ""
+  }
+]
+__EOM__
+	local out=$(lpass show --sync=no --json test-account)
+	assert_str_eq "$expected" "$out"
+}
+
+function test_show_note
+{
+	login || return 1
+	# note the extra space here because mock server includes one
+	# normally note fields are trimmed when saved
+	read -r -d '' expected <<__EOM__
+test-group/test-note [id: 0002]
+Username:  test-note-user
+Password:  test-note-password
+Hostname:  foo.example.com
+NoteType:  Server
+__EOM__
+	local out=$(lpass show --sync=no test-note)
+	assert_str_eq "$expected" "$out"
+}
+
+function test_show_reprompt
+{
+	login || return 1
+	read -r -d '' expected <<__EOM__
+test-group/test-reprompt-account [id: 0003]
+Username: xyz@example.com
+Password: test-account-password
+URL: https://test-url.example.com/
+Reprompt: Yes
+__EOM__
+	local out=$(lpass show --sync=no test-reprompt-account)
+	assert_str_eq "$expected" "$out"
+}
+
+function test_ls
+{
+	login || return 1
+	read -r -d '' expected <<__EOM__
+test-group/test-account [id: 0001]
+test-group/test-note [id: 0002]
+test-group/test-reprompt-account [id: 0003]
+test-group/test-reprompt-note [id: 0004]
+__EOM__
+	local out=$(lpass ls --sync=no)
+	assert_str_eq "$expected" "$out"
+}
+
+function test_export
+{
+	login || return 1
+	read -r -d '' expected <<__EOM__
+url,username,password,extra,name,grouping,fav
+http://sn,,,"NoteType: Server
+Hostname: foo.example.com
+Username: test-note-user
+Password: test-note-password",test-reprompt-note,test-group,0
+https://test-url.example.com/,xyz@example.com,test-account-password,,test-reprompt-account,test-group,0
+http://sn,,,"NoteType: Server
+Hostname: foo.example.com
+Username: test-note-user
+Password: test-note-password",test-note,test-group,0
+https://test-url.example.com/,xyz@example.com,test-account-password,,test-account,test-group,0
+__EOM__
+	local out=$(lpass export --sync=no | tr -d '\r')
+	assert_str_eq "$expected" "$out"
+}
+
+function test_export_extended
+{
+	login || return 1
+	read -r -d '' expected <<__EOM__
+grouping,url,username,password,extra,name,fav,id,group,fullname,last_touch,last_modified_gmt,unknown,attachpresent
+test-group,http://sn,,,"NoteType: Server
+Hostname: foo.example.com
+Username: test-note-user
+Password: test-note-password",test-reprompt-note,0,0004,test-group,test-group/test-reprompt-note,skipped,skipped,,0
+test-group,https://test-url.example.com/,xyz@example.com,test-account-password,,test-reprompt-account,0,0003,test-group,test-group/test-reprompt-account,skipped,skipped,,0
+test-group,http://sn,,,"NoteType: Server
+Hostname: foo.example.com
+Username: test-note-user
+Password: test-note-password",test-note,0,0002,test-group,test-group/test-note,skipped,skipped,,0
+test-group,https://test-url.example.com/,xyz@example.com,test-account-password,,test-account,0,0001,test-group,test-group/test-account,skipped,skipped,,0
+__EOM__
+local out=$(lpass export --sync=no --fields=grouping,url,username,password,extra,name,fav,id,group,fullname,last_touch,last_modified_gmt,unknown,attachpresent | tr -d '\r')
+	assert_str_eq "$expected" "$out"
+}
+
+runtests "$@"
