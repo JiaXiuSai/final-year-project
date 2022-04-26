@@ -5,10 +5,10 @@ Folders:
 - Collection: Code used for collection of password corpus
 - Information Entropy: Code used for collection of password corpus
 - Password Corpus: Password corpus collected
-- Results: Results from zxcvbn.py in csv format, sorted by estimated strength, and stats.py
+- Results: Results from zxcvbn.py in CSV format, sorted by estimated strength, and stats.py
 
 
-Code used for cross-evaluation algorithm using PassGAN can be found on Onedrive [here]()
+Code used for cross-evaluation algorithm using PassGAN can be found on Onedrive [here](https://durhamuniversity-my.sharepoint.com/:f:/g/personal/rpsh88_durham_ac_uk/EgUo4pMuNCdDv-aIE8CMT4MBlY9JmG2Z66VOF7_xe8P2Tg?e=inGTPA). A Durham Unversity email is required and please do not hesitate to contact me if there are any difficulties accessing the folder. 
 
 ## Installation
 1. Install  [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) if you haven't already.
