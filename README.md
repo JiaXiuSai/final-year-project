@@ -20,5 +20,3 @@ S. Oesch and S. Ruoti, “That was then, this is now: A security evaluation of p
 B. Hitaj, P. Gasti, G. Ateniese, and F. Perez-Cruz, “Passgan: A deep learning approach for password guessing” 2019.
 
 D. L. Wheeler, “Zxcvbn: Low-budget password strength estimation” in Proceedings of the 25th USENIX Conference on Security Symposium, ser. Sec’16. Usa: USENIX Association, 2016, p. 157–173
-
-"# final-year-project" 
