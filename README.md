@@ -1,6 +1,6 @@
 # Security Analysis of Modern Password Managers
 
-This submission contains code for the Security Analysis of Modern Password Managers paper, submission to Durham University COMP3012 Computer Science Project 2021/22.
+This submission contains code for the Security Analysis of Modern Password Managers paper for Durham University COMP3012 Computer Science Project 2021/22.
 
 | Password Manager |    Version   |
 |------------------|:------------:|
