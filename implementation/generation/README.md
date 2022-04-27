@@ -4,11 +4,12 @@ This folder contains all the source code for the password generation analysis.
 Folders:
 - Collection: Code used for collection of password corpus.
 - Information Entropy: Code used for password analysis (Shannon entropy and chi^2 test).
+- PassGAN: Code used for deep learning password guessing (PassGAN)
 - Password Corpus: Password corpus collected.
 - Results: Results from zxcvbn.py in CSV format, sorted by estimated strength, and stats.py.
 
 
-Code used for cross-evaluation algorithm using PassGAN can be found on OneDrive [here](https://durhamuniversity-my.sharepoint.com/:f:/g/personal/rpsh88_durham_ac_uk/EgUo4pMuNCdDv-aIE8CMT4MBlY9JmG2Z66VOF7_xe8P2Tg?e=inGTPA). A Durham Unversity email is required and please do not hesitate to contact me if there are any difficulties accessing the folder. 
+The models trained using PassGAN can be found on OneDrive [here](https://durhamuniversity-my.sharepoint.com/:f:/g/personal/rpsh88_durham_ac_uk/EgUo4pMuNCdDv-aIE8CMT4MB9DUCt2avD0AeWNN7vGaVjw?e=jgRE0e) (13 GB). A Durham Unversity email is required and please do not hesitate to contact me if there are any difficulties accessing the folder. 
 
 ## Installation
 1. Install  [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) if you haven't already.

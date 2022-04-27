@@ -1,0 +1,110 @@
+1password
+
+python train.py -i data/train_test/1password/0_train.txt -o output/1password/0 -n 50000 -l 20 
+python sample.py -i output/1password/0 -c output/1password/0/checkpoints/checkpoint_50000.ckpt -o output/1password/0_generated.txt -b 1024 -l 20
+python train.py -i data/train_test/1password/1_train.txt -o output/1password/1 -n 50000 -l 20 
+python sample.py -i output/1password/1 -c output/1password/1/checkpoints/checkpoint_50000.ckpt -o output/1password/1_generated.txt -b 1024 -l 20
+python train.py -i data/train_test/1password/2_train.txt -o output/1password/2 -n 50000 -l 20 
+python sample.py -i output/1password/2 -c output/1password/2/checkpoints/checkpoint_50000.ckpt -o output/1password/2_generated.txt -b 1024 -l 20
+python train.py -i data/train_test/1password/3_train.txt -o output/1password/3 -n 50000 -l 20 
+python sample.py -i output/1password/3 -c output/1password/3/checkpoints/checkpoint_50000.ckpt -o output/1password/3_generated.txt -b 1024 -l 20
+python train.py -i data/train_test/1password/4_train.txt -o output/1password/4 -n 50000 -l 20 
+python sample.py -i output/1password/4 -c output/1password/4/checkpoints/checkpoint_50000.ckpt -o output/1password/4_generated.txt -b 1024 -l 20
+
+
+bitwarden
+
+python train.py -i data/train_test/bitwarden/0_train.txt -o output/bitwarden/0 -n 50000 -l 14 
+python sample.py -i output/bitwarden/0 -c output/bitwarden/0/checkpoints/checkpoint_50000.ckpt -o output/bitwarden/0_generated.txt -b 1024 -l 14
+python train.py -i data/train_test/bitwarden/1_train.txt -o output/bitwarden/1 -n 50000 -l 14 
+python sample.py -i output/bitwarden/1 -c output/bitwarden/1/checkpoints/checkpoint_50000.ckpt -o output/bitwarden/1_generated.txt -b 1024 -l 14
+python train.py -i data/train_test/bitwarden/2_train.txt -o output/bitwarden/2 -n 50000 -l 14 
+python sample.py -i output/bitwarden/2 -c output/bitwarden/2/checkpoints/checkpoint_50000.ckpt -o output/bitwarden/2_generated.txt -b 1024 -l 14
+python train.py -i data/train_test/bitwarden/3_train.txt -o output/bitwarden/3 -n 50000 -l 14 
+python sample.py -i output/bitwarden/3 -c output/bitwarden/3/checkpoints/checkpoint_50000.ckpt -o output/bitwarden/3_generated.txt -b 1024 -l 14
+python train.py -i data/train_test/bitwarden/4_train.txt -o output/bitwarden/4 -n 50000 -l 14 
+python sample.py -i output/bitwarden/4 -c output/bitwarden/4/checkpoints/checkpoint_50000.ckpt -o output/bitwarden/4_generated.txt -b 1024 -l 14
+
+
+chrome
+
+python train.py -i data/train_test/chrome/0_train.txt -o output/chrome/0 -n 50000 -l 15
+python sample.py -i output/chrome/0 -c output/chrome/0/checkpoints/checkpoint_50000.ckpt -o output/chrome/0_generated.txt -b 1024 -l 15
+python train.py -i data/train_test/chrome/1_train.txt -o output/chrome/1 -n 50000 -l 15 
+python sample.py -i output/chrome/1 -c output/chrome/1/checkpoints/checkpoint_50000.ckpt -o output/chrome/1_generated.txt -b 1024 -l 15
+python train.py -i data/train_test/chrome/2_train.txt -o output/chrome/2 -n 50000 -l 15 
+python sample.py -i output/chrome/2 -c output/chrome/2/checkpoints/checkpoint_50000.ckpt -o output/chrome/2_generated.txt -b 1024 -l 15
+python train.py -i data/train_test/chrome/3_train.txt -o output/chrome/3 -n 50000 -l 15 
+python sample.py -i output/chrome/3 -c output/chrome/3/checkpoints/checkpoint_50000.ckpt -o output/chrome/3_generated.txt -b 1024 -l 15
+python train.py -i data/train_test/chrome/4_train.txt -o output/chrome/4 -n 50000 -l 15 
+python sample.py -i output/chrome/4 -c output/chrome/4/checkpoints/checkpoint_50000.ckpt -o output/chrome/4_generated.txt -b 1024 -l 15
+
+
+dashlane
+
+python train.py -i data/train_test/dashlane/0_train.txt -o output/dashlane/0 -n 50000 -l 16
+python sample.py -i output/dashlane/0 -c output/dashlane/0/checkpoints/checkpoint_50000.ckpt -o output/dashlane/0_generated.txt -b 1024 -l 16
+python train.py -i data/train_test/dashlane/1_train.txt -o output/dashlane/1 -n 50000 -l 16 
+python sample.py -i output/dashlane/1 -c output/dashlane/1/checkpoints/checkpoint_50000.ckpt -o output/dashlane/1_generated.txt -b 1024 -l 16
+python train.py -i data/train_test/dashlane/2_train.txt -o output/dashlane/2 -n 50000 -l 16 
+python sample.py -i output/dashlane/2 -c output/dashlane/2/checkpoints/checkpoint_50000.ckpt -o output/dashlane/2_generated.txt -b 1024 -l 16
+python train.py -i data/train_test/dashlane/3_train.txt -o output/dashlane/3 -n 50000 -l 16 
+python sample.py -i output/dashlane/3 -c output/dashlane/3/checkpoints/checkpoint_50000.ckpt -o output/dashlane/3_generated.txt -b 1024 -l 16
+python train.py -i data/train_test/dashlane/4_train.txt -o output/dashlane/4 -n 50000 -l 16 
+python sample.py -i output/dashlane/4 -c output/dashlane/4/checkpoints/checkpoint_50000.ckpt -o output/dashlane/4_generated.txt -b 1024 -l 16
+
+
+edge
+
+python train.py -i data/train_test/edge/0_train.txt -o output/edge/0 -n 50000 -l 15
+python sample.py -i output/edge/0 -c output/edge/0/checkpoints/checkpoint_50000.ckpt -o output/edge/0_generated.txt -b 1024 -l 15
+python train.py -i data/train_test/edge/1_train.txt -o output/edge/1 -n 50000 -l 15 
+python sample.py -i output/edge/1 -c output/edge/1/checkpoints/checkpoint_50000.ckpt -o output/edge/1_generated.txt -b 1024 -l 15
+python train.py -i data/train_test/edge/2_train.txt -o output/edge/2 -n 50000 -l 15 
+python sample.py -i output/edge/2 -c output/edge/2/checkpoints/checkpoint_50000.ckpt -o output/edge/2_generated.txt -b 1024 -l 15
+python train.py -i data/train_test/edge/3_train.txt -o output/edge/3 -n 50000 -l 15 
+python sample.py -i output/edge/3 -c output/edge/3/checkpoints/checkpoint_50000.ckpt -o output/edge/3_generated.txt -b 1024 -l 15
+python train.py -i data/train_test/edge/4_train.txt -o output/edge/4 -n 50000 -l 15 
+python sample.py -i output/edge/4 -c output/edge/4/checkpoints/checkpoint_50000.ckpt -o output/edge/4_generated.txt -b 1024 -l 15
+
+
+firefox
+
+python train.py -i data/train_test/firefox/0_train.txt -o output/firefox/0 -n 50000 -l 15
+python sample.py -i output/firefox/0 -c output/firefox/0/checkpoints/checkpoint_50000.ckpt -o output/firefox/0_generated.txt -b 1024 -l 15
+python train.py -i data/train_test/firefox/1_train.txt -o output/firefox/1 -n 50000 -l 15 
+python sample.py -i output/firefox/1 -c output/firefox/1/checkpoints/checkpoint_50000.ckpt -o output/firefox/1_generated.txt -b 1024 -l 15
+python train.py -i data/train_test/firefox/2_train.txt -o output/firefox/2 -n 50000 -l 15 
+python sample.py -i output/firefox/2 -c output/firefox/2/checkpoints/checkpoint_50000.ckpt -o output/firefox/2_generated.txt -b 1024 -l 15
+python train.py -i data/train_test/firefox/3_train.txt -o output/firefox/3 -n 50000 -l 15 
+python sample.py -i output/firefox/3 -c output/firefox/3/checkpoints/checkpoint_50000.ckpt -o output/firefox/3_generated.txt -b 1024 -l 15
+python train.py -i data/train_test/firefox/4_train.txt -o output/firefox/4 -n 50000 -l 15 
+python sample.py -i output/firefox/4 -c output/firefox/4/checkpoints/checkpoint_50000.ckpt -o output/firefox/4_generated.txt -b 1024 -l 15
+
+
+lastpass
+
+python train.py -i data/train_test/lastpass/0_train.txt -o output/lastpass/0 -n 50000 -l 12
+python sample.py -i output/lastpass/0 -c output/lastpass/0/checkpoints/checkpoint_50000.ckpt -o output/lastpass/0_generated.txt -b 1024 -l 12
+python train.py -i data/train_test/lastpass/1_train.txt -o output/lastpass/1 -n 50000 -l 12 
+python sample.py -i output/lastpass/1 -c output/lastpass/1/checkpoints/checkpoint_50000.ckpt -o output/lastpass/1_generated.txt -b 1024 -l 12
+python train.py -i data/train_test/lastpass/2_train.txt -o output/lastpass/2 -n 50000 -l 12 
+python sample.py -i output/lastpass/2 -c output/lastpass/2/checkpoints/checkpoint_50000.ckpt -o output/lastpass/2_generated.txt -b 1024 -l 12
+python train.py -i data/train_test/lastpass/3_train.txt -o output/lastpass/3 -n 50000 -l 12 
+python sample.py -i output/lastpass/3 -c output/lastpass/3/checkpoints/checkpoint_50000.ckpt -o output/lastpass/3_generated.txt -b 1024 -l 12
+python train.py -i data/train_test/lastpass/4_train.txt -o output/lastpass/4 -n 50000 -l 12 
+python sample.py -i output/lastpass/4 -c output/lastpass/4/checkpoints/checkpoint_50000.ckpt -o output/lastpass/4_generated.txt -b 1024 -l 12
+
+
+rockyou
+
+python train.py -i data/train_test/rockyou/0_train.txt -o output/rockyou/0 -n 50000
+python sample.py -i output/rockyou/0 -c output/rockyou/0/checkpoints/checkpoint_50000.ckpt -o output/rockyou/0_generated.txt -b 1024
+python train.py -i data/train_test/rockyou/1_train.txt -o output/rockyou/1 -n 50000
+python sample.py -i output/rockyou/1 -c output/rockyou/1/checkpoints/checkpoint_50000.ckpt -o output/rockyou/1_generated.txt -b 1024
+python train.py -i data/train_test/rockyou/2_train.txt -o output/rockyou/2 -n 50000
+python sample.py -i output/rockyou/2 -c output/rockyou/2/checkpoints/checkpoint_50000.ckpt -o output/rockyou/2_generated.txt -b 1024
+python train.py -i data/train_test/rockyou/3_train.txt -o output/rockyou/3 -n 50000
+python sample.py -i output/rockyou/3 -c output/rockyou/3/checkpoints/checkpoint_50000.ckpt -o output/rockyou/3_generated.txt -b 1024
+python train.py -i data/train_test/rockyou/4_train.txt -o output/rockyou/4 -n 50000
+python sample.py -i output/rockyou/4 -c output/rockyou/4/checkpoints/checkpoint_50000.ckpt -o output/rockyou/4_generated.txt -b 1024
